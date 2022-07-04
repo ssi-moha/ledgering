@@ -5,8 +5,12 @@ const theme = extendTheme({
   styles: {
     global: {
       "html, body": {
-        backgroundColor: "black",
+        backgroundColor: "#1c1d20",
         color: "white",
+        fontFamily: "HMAlphaMono,Open sans,arial,sans-serif",
+        fontWeight: 500,
+        lineHeight: 1.2,
+        textTransform: "uppercase"
       },
     },
   },

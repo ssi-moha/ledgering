@@ -27,7 +27,7 @@ const Header = ({ title, type }: HeaderProps) => {
         </Heading>
 
         <Box>
-          <Button size="large" colorScheme="gray" color={"black"} p={2}>
+          <Button size="large" bg={"#ff5300"} p={4} border="1px">
             {active ? (
               <>
                 <CheckIcon mr={2} /> {account?.slice(0, 7)}...
@@ -38,7 +38,8 @@ const Header = ({ title, type }: HeaderProps) => {
               </>
             )}
           </Button>
-          <Button  size="large" colorScheme="gray" color={"black"} p={2} ml={2}>
+
+          <Button size="large" bg="#f1f1f1" color={"black"} p={4} ml={6}>
             {ledgerAddress ? (
               <>
                 <CheckIcon mr={2} /> {ledgerAddress.slice(0, 7)}...
@@ -51,7 +52,8 @@ const Header = ({ title, type }: HeaderProps) => {
           </Button>
         </Box>
       </Box>
-      <Divider w="90%" />
+
+      <Divider w="95%" borderBottomWidth={2} borderColor="white" />
     </>
   );
 };

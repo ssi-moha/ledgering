@@ -25,12 +25,11 @@ const Ledger = () => {
 
   return (
     <VStack h="full" flex="column" justifyContent="space-around">
-      <Button size="large" colorScheme="gray" color={"black"} p={2} ml={2}>
-        Connect your Ledger
-      </Button>
-      <Divider />
+      <img width="180px" src="ledger-logo-long.svg" alt="Ledger" />
+
       <Box>
         <FormLabel>Enter your Ledger address</FormLabel>
+
         <HStack>
           <Input value={ledgerAddress} onChange={handleChange} />
           <Button
