@@ -36,7 +36,7 @@ const Ledger = () => {
           <Button
             size="large"
             colorScheme="gray"
-            color={"black"}
+            color="black"
             p={2}
             ml={2}
             onClick={handleClick}
