@@ -6,7 +6,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./ui/theme";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import { Web3Provider } from "@ethersproject/providers";
+import { Web3Provider,  } from "@ethersproject/providers";
 import { Web3ReactProvider } from "@web3-react/core";
 
 const root = ReactDOM.createRoot(

@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import balancesReducer from "./slices/balance";
 import ledgerReducer from "./slices/ledger";
 
 export default configureStore({
   reducer: {
-    ledger: ledgerReducer
+    ledger: ledgerReducer,
+    balances: balancesReducer,
   },
 });
