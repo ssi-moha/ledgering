@@ -1,5 +1,7 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Ledger from "./panels/Legder";
+import Wallet from "./panels/Wallet";
+
 
 const Stepper = () => {
   return (
@@ -9,11 +11,16 @@ const Stepper = () => {
         <Tab flex={1}>Connect your Wallet</Tab>
         <Tab flex={1}>Send your funds</Tab>
       </TabList>
+
       <TabPanels minH={400} flex={1} borderColor="white" borderWidth={1}>
         <TabPanel h="full" w="full">
             <Ledger />
         </TabPanel>
-        <TabPanel>Metamask</TabPanel>
+
+        <TabPanel h="full" w="full">
+            <Wallet />
+        </TabPanel>
+
         <TabPanel>Send your funds</TabPanel>
       </TabPanels>
     </Tabs>
