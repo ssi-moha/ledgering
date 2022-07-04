@@ -1,5 +1,6 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import Ledger from "./panels/Legder";
+import Sender from "./panels/Sender";
 import Wallet from "./panels/Wallet";
 
 const Stepper = () => {
@@ -41,7 +42,9 @@ const Stepper = () => {
           <Wallet />
         </TabPanel>
 
-        <TabPanel>Send your funds</TabPanel>
+        <TabPanel>
+          <Sender />
+        </TabPanel>
       </TabPanels>
     </Tabs>
   );

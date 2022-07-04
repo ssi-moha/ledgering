@@ -1,29 +1,9 @@
 import { Box, VStack } from "@chakra-ui/react";
-import { useWeb3React } from "@web3-react/core";
-
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-
-import { fetchBalances } from "./store/slices/balance";
 
 import Header from "./ui/components/Header";
 import Stepper from "./ui/components/Stepper";
 
 function App() {
-  const { account, active } = useWeb3React();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    async function getBalances() {
-      if (active && account) {
-        // @ts-ignore
-        dispatch(fetchBalances(account));
-      }
-    }
-
-    getBalances();
-  }, [account, active, dispatch]);
-
   return (
     <VStack py="2">
       <Header type="h1" title="Ledgering your crypto" />

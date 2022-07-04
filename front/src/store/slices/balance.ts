@@ -4,12 +4,15 @@ import { Balance } from "../../types";
 
 export const fetchBalances = createAsyncThunk(
   "balances/fetch",
-  async (walletAddress: string) => getAllTokenBalances(walletAddress)
+  async (walletAddress: string) =>
+    (await getAllTokenBalances(walletAddress)) as Balance[]
 );
 
-export const balancesSlice = createSlice<Balance[], {}>({
+const initialState: Balance[] = [];
+
+export const balancesSlice = createSlice({
   name: "balances",
-  initialState: [],
+  initialState,
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchBalances.fulfilled, (state, action) => {
@@ -17,7 +20,5 @@ export const balancesSlice = createSlice<Balance[], {}>({
     });
   },
 });
-
-export const {} = balancesSlice.actions;
 
 export default balancesSlice.reducer;
