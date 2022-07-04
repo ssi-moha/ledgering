@@ -1,25 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, VStack } from "@chakra-ui/react";
+import Header from "./ui/components/Header";
+import Stepper from "./ui/components/Stepper";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <VStack py="2">
+      <Header type="h1" title="Ledgering your crypto" />
+      <Box w="full" px={24} py={12}>
+        <Stepper />
+      </Box>
+    </VStack>
   );
 }
 
