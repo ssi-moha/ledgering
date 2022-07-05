@@ -55,7 +55,7 @@ const Sender = () => {
               borderColor={"white"}
             >
               <Box display={"flex"} p={3} borderWidth={1} borderColor={"white"}>
-                {/* <img width="24px" src={`${symbol}.svg`} alt={symbol} /> */}
+                <img width="24px" src={`${symbol}.svg`} alt={symbol} />
                 <span style={{ margin: "auto", marginLeft: "4px" }}>
                   {balance}
                 </span>
