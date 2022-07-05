@@ -7,10 +7,10 @@ const ethplorer = (address: string) =>
     ETH: { balance: number };
     tokens: {
       tokenInfo: { decimals: string; symbol: string };
-      rawBalance: string;
+      balance: string;
     }[];
   }>(
-    `https://api.ethplorer.io/getAddressInfo/${address}?apiKey=EK-t1m4J-wPMKQNu-mG5Sd`,
+    `https://kovan-api.ethplorer.io/getAddressInfo/${address}?apiKey=EK-t1m4J-wPMKQNu-mG5Sd`,
     {
       params: {
         apikey: process.env.REACT_APP_ETHPLORER_API_KEY,
@@ -23,13 +23,12 @@ export async function getAllTokenBalances(
 ): Promise<Balance[]> {
   const tokens = await ethplorer(walletAddress);
 
-  const realBalances = tokens.data.tokens.map((token) => ({
-    symbol: token.tokenInfo.symbol,
-    balance: getRealBalance(
-      token.tokenInfo.decimals,
-      token.rawBalance
-    ).toString(),
-  }));
+  const realBalances = tokens.data.tokens.map((token) => {
+    return {
+      symbol: token.tokenInfo.symbol,
+      balance: getRealBalance(token.tokenInfo.decimals, token.balance),
+    };
+  });
 
   const ethBalance = {
     symbol: "ETH",
