@@ -1,39 +1,45 @@
+import { TransactionResponse } from "@ethersproject/providers";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ethers } from "ethers";
+import sendERC20 from "../../utils/sendERC20";
+import sendEther from "../../utils/sendEther";
 
-export const sendEther = createAsyncThunk(
-  "ether/send",
-  async function sendEther(walletAddress: string) {
-    console.log(walletAddress);
-    
-    try {
-      const provider = new ethers.providers.Web3Provider(
-        // @ts-ignore
-        window.ethereum,
-        "kovan"
-      );
-      await provider.send("eth_requestAccounts", []);
-      const signer = provider.getSigner();
-      ethers.utils.getAddress(walletAddress);
-      const tx = await signer.sendTransaction({
-        to: walletAddress,
-        value: ethers.utils.parseEther("0.0001"),
-      });
-      return tx;
-    } catch (e) {
-      console.log(e);
-    }
+const sendAllTokens = async (
+  walletAddress: string,
+  balance: string,
+  tokenAddress: string
+) => {
+  if (tokenAddress) {
+    const tx = await sendERC20(walletAddress, balance, tokenAddress);
+    return tx;
   }
+
+  return await sendEther(walletAddress, balance);
+};
+
+type ThunkParams = {
+  walletAddress: string;
+  balance: string;
+  tokenAddress: string;
+};
+
+export const sendToken = createAsyncThunk(
+  "ether/send",
+  async ({ walletAddress, balance, tokenAddress }: ThunkParams) =>
+    (await sendAllTokens(
+      walletAddress,
+      balance,
+      tokenAddress
+    )) as TransactionResponse
 );
 
-const initialState: any[] = [];
+const initialState: TransactionResponse[] = [];
 
 export const balancesSlice = createSlice({
   name: "ether",
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(sendEther.fulfilled, (state, action) => {
+    builder.addCase(sendToken.fulfilled, (state, action) => {
       return [...state, action.payload];
     });
   },

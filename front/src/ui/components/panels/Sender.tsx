@@ -1,7 +1,7 @@
 import { Box, Button } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import useGetBalances from "../../../hooks/useGetBalances";
-import { sendEther } from "../../../store/slices/ether";
+import { sendToken } from "../../../store/slices/ether";
 import { RootState, useAppDispatch } from "../../../store/store";
 
 const tokenIcon = {
@@ -17,9 +17,15 @@ const Sender = () => {
   const dispatch = useAppDispatch();
   const ledger = useSelector((state: RootState) => state.ledger);
 
-  const handleClick = () => {
-    if (ledger) dispatch(sendEther(ledger));
-    console.log("clicked");
+  const handleClick = (balance: string, address: string) => {
+    if (ledger)
+      dispatch(
+        sendToken({
+          walletAddress: ledger as string,
+          balance,
+          tokenAddress: address,
+        })
+      );
   };
 
   return (
@@ -35,7 +41,7 @@ const Sender = () => {
 
       <div>
         {balances.map((token) => {
-          const { symbol, balance } = token;
+          const { symbol, balance, address } = token;
 
           return (
             <Box
@@ -49,7 +55,7 @@ const Sender = () => {
               borderColor={"white"}
             >
               <Box display={"flex"} p={3} borderWidth={1} borderColor={"white"}>
-                <img width="24px" src={`${symbol}.svg`} alt={symbol} />
+                {/* <img width="24px" src={`${symbol}.svg`} alt={symbol} /> */}
                 <span style={{ margin: "auto", marginLeft: "4px" }}>
                   {balance}
                 </span>
@@ -59,7 +65,11 @@ const Sender = () => {
               </Box>
 
               <Box mt={4}>
-                <Button bg="#f1f1f1" color={"black"} onClick={handleClick}>
+                <Button
+                  bg="#f1f1f1"
+                  color={"black"}
+                  onClick={() => handleClick(balance, address)}
+                >
                   Send
                 </Button>
               </Box>

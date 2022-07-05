@@ -6,7 +6,7 @@ const ethplorer = (address: string) =>
   axios.get<{
     ETH: { balance: number };
     tokens: {
-      tokenInfo: { decimals: string; symbol: string };
+      tokenInfo: { decimals: string; symbol: string; address: string };
       balance: string;
     }[];
   }>(
@@ -27,12 +27,14 @@ export async function getAllTokenBalances(
     return {
       symbol: token.tokenInfo.symbol,
       balance: getRealBalance(token.tokenInfo.decimals, token.balance),
+      address: token.tokenInfo.address,
     };
   });
 
   const ethBalance = {
     symbol: "ETH",
     balance: tokens.data.ETH.balance.toString(),
+    address: "",
   };
 
   return [...realBalances, ethBalance];
