@@ -13,7 +13,7 @@ const ethplorer = (address: string) =>
     `https://kovan-api.ethplorer.io/getAddressInfo/${address}?apiKey=EK-t1m4J-wPMKQNu-mG5Sd`,
     {
       params: {
-        apikey: process.env.REACT_APP_ETHPLORER_API_KEY,
+        apiKey: process.env.REACT_APP_ETHPLORER_API_KEY,
       },
     }
   );

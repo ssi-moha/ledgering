@@ -14,7 +14,7 @@ const injected = new InjectedConnector({
 const Wallet = () => {
   const { account, active, activate, deactivate } = useWeb3React();
 
-  const handleConnect = () => {
+  const handleConnect = async () => {
     if (active) {
       deactivate();
       return;
