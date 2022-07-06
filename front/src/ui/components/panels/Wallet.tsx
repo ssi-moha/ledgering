@@ -12,7 +12,7 @@ const injected = new InjectedConnector({
 });
 
 const Wallet = () => {
-  const { account, active, activate, deactivate } = useWeb3React();
+  const { active, activate, deactivate } = useWeb3React();
 
   const handleConnect = async () => {
     if (active) {

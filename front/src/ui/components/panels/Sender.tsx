@@ -4,14 +4,6 @@ import useGetBalances from "../../../hooks/useGetBalances";
 import { sendToken } from "../../../store/slices/ether";
 import { RootState, useAppDispatch } from "../../../store/store";
 
-const tokenIcon = {
-  ETH: "eth",
-  BUSD: "busd",
-  USDT: "usdt",
-  USDC: "usdc",
-  BTC: "btc",
-};
-
 const Sender = () => {
   const balances = useGetBalances();
   const dispatch = useAppDispatch();
@@ -21,7 +13,7 @@ const Sender = () => {
     if (ledger)
       dispatch(
         sendToken({
-          walletAddress: ledger as string,
+          walletAddress: ledger,
           balance,
           tokenAddress: address,
         })
@@ -36,7 +28,7 @@ const Sender = () => {
       flexDirection="column"
     >
       <Box mt="4">
-        <strong> Send your Funds </strong>
+        <strong>Send your Funds</strong>
       </Box>
 
       <div>
@@ -48,31 +40,23 @@ const Sender = () => {
               display="flex"
               justifyContent="center"
               alignItems="center"
-              flexDirection="column"
+              flexDirection="row"
               mt={6}
               p={3}
               borderWidth={1}
-              borderColor={"white"}
+              borderColor="white"
             >
-              <Box display={"flex"} p={3} borderWidth={1} borderColor={"white"}>
-                <img width="24px" src={`${symbol}.svg`} alt={symbol} />
-                <span style={{ margin: "auto", marginLeft: "4px" }}>
-                  {balance}
-                </span>
-                <span style={{ margin: "auto", marginLeft: "4px" }}>
-                  {symbol}
-                </span>
-              </Box>
+              <span style={{ margin: "auto", marginLeft: "4px" }}>
+                {symbol} {balance}
+              </span>
 
-              <Box mt={4}>
-                <Button
-                  bg="#f1f1f1"
-                  color={"black"}
-                  onClick={() => handleClick(balance, address)}
-                >
-                  Send
-                </Button>
-              </Box>
+              <Button
+                bg="#f1f1f1"
+                color="black"
+                onClick={() => handleClick(balance, address)}
+              >
+                Send
+              </Button>
             </Box>
           );
         })}
