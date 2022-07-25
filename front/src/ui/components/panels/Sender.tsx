@@ -9,13 +9,14 @@ const Sender = () => {
   const dispatch = useAppDispatch();
   const ledger = useSelector((state: RootState) => state.ledger);
 
-  const handleClick = (balance: string, address: string) => {
+  const handleClick = (balance: string, address: string, decimals: string) => {
     if (ledger)
       dispatch(
         sendToken({
           walletAddress: ledger,
           balance,
           tokenAddress: address,
+          decimals, 
         })
       );
   };
@@ -33,7 +34,7 @@ const Sender = () => {
 
       <div>
         {balances.map((token) => {
-          const { symbol, balance, address } = token;
+          const { symbol, balance, address, decimals } = token;
 
           return (
             <Box
@@ -46,6 +47,8 @@ const Sender = () => {
               borderWidth={1}
               borderColor="white"
             >
+              <img width="24px" src={`${symbol}.svg`} alt={symbol} />
+
               <span style={{ margin: "auto", marginLeft: "4px" }}>
                 {symbol} {balance}
               </span>
@@ -53,7 +56,7 @@ const Sender = () => {
               <Button
                 bg="#f1f1f1"
                 color="black"
-                onClick={() => handleClick(balance, address)}
+                onClick={() => handleClick(balance, address, decimals)}
               >
                 Send
               </Button>

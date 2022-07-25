@@ -28,12 +28,14 @@ export async function getAllTokenBalances(
       symbol: token.tokenInfo.symbol,
       balance: getRealBalance(token.tokenInfo.decimals, token.balance),
       address: token.tokenInfo.address,
+      decimals: token.tokenInfo.decimals,
     };
   });
 
   const ethBalance = {
     symbol: "ETH",
     balance: tokens.data.ETH.balance.toString(),
+    decimals: "18",
     address: "",
   };
 

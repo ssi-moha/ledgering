@@ -6,10 +6,11 @@ import sendEther from "../../utils/sendEther";
 const sendAllTokens = async (
   walletAddress: string,
   balance: string,
-  tokenAddress: string
+  tokenAddress: string,
+  decimals: string
 ) => {
   if (tokenAddress) {
-    const tx = await sendERC20(walletAddress, balance, tokenAddress);
+    const tx = await sendERC20(walletAddress, balance, tokenAddress, decimals);
     return tx;
   }
 
@@ -20,15 +21,17 @@ type ThunkParams = {
   walletAddress: string;
   balance: string;
   tokenAddress: string;
+  decimals: string;
 };
 
 export const sendToken = createAsyncThunk(
   "ether/send",
-  async ({ walletAddress, balance, tokenAddress }: ThunkParams) =>
+  async ({ walletAddress, balance, tokenAddress, decimals }: ThunkParams) =>
     (await sendAllTokens(
       walletAddress,
       balance,
-      tokenAddress
+      tokenAddress,
+      decimals
     )) as TransactionResponse
 );
 
